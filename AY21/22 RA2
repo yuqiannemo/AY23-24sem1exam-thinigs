@@ -1,0 +1,71 @@
+function foo(xs, ys) {
+ if (is_null(xs)) {
+ return map(x => x, ys);
+ } else {
+ const wish = foo(tail(xs), ys);
+ set_tail(xs, wish);
+ return xs;
+ }
+}
+const AA = list(list(1), list(2));
+const BB = list(list(3), list(4));
+const CC = foo(AA, BB);
+const AA2 = tail(tail(AA));
+const BB2 = tail(tail(BB));
+const CC2 = tail(tail(CC));
+
+/*let z = 1;
+let y = 1;
+let x = 1;
+function goo(f) {
+ z = 2;
+ let y = 2;
+ let x = 2;
+ let g = () => 100 * x + f(y);
+ z = 3;
+ y = 3;
+ x = 3;
+ return g;
+}
+const hoo = goo(y => 10 * y + z);
+z = 4;
+y = 4;
+x = 4;
+const w = hoo();
+w;
+
+function moo(f, xs) {
+ function dee(g, ys) {
+ if (is_null(ys)) {
+ return ys;
+ } else {
+ return pair(g(head(ys)), moo(g, tail(ys)));
+ }
+ }
+ return dee(f, xs);
+}
+let L = list(1, 2, 3);
+let R = moo(w => 10 * w, L);
+R;
+
+function koo(fun, A) {
+ const len = array_length(A);
+ let m = 0;
+ while (m < len) {
+ A[m] = fun(A[m], A[m]);
+ m = m + 1;
+ }
+}
+function see(a, n) {
+ let acc = 0;
+ let i = 0;
+ while (i < n) {
+ let sum = acc + a;
+ acc = sum;
+ i = i + 1;
+ }
+ return acc;
+}
+const AA = [1, 2, 3, 4];
+koo(see, AA);
+AA;*/
