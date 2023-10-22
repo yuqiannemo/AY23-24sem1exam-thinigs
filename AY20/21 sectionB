@@ -1,0 +1,17 @@
+function ff(A, v) {
+let low = 0;
+let high = array_length(A) - 1;
+while (low <= high) {
+const mid = math_floor((low + high) / 2 );
+if (v === A[mid]) {
+break;
+} else if (v < A[mid]) {
+high = mid - 1;
+} else {
+low = mid + 1;
+}
+}
+return (low <= high);
+}
+const A = [1,2,3,4,5,6,7];
+ff(A, 5);
