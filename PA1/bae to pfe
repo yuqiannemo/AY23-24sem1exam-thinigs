@@ -1,0 +1,66 @@
+function eval_postfix_exp(pfe) {
+//9:30
+    // WRITE YOUR SOLUTION HERE.
+    let sym = [];
+    let syml = 0;
+    let num = [];
+    let numl = 0; 
+    let cnt = 0;
+    const l = array_length(pfe);
+    
+    while (cnt < l) {
+        display(num);
+        display(sym);
+        const now = pfe[l - cnt - 1];
+        
+        if (is_string(now)) {
+            sym[syml] = now;
+            syml = syml + 1;
+            if (numl >= 2) {
+                const b = sym[syml - 2];
+                const op_r = num[numl - 1];
+                const op_l = num[numl - 2];
+                let ex = 0;
+                syml = syml - 1;
+                numl = numl - 2;
+                if (b === "+") {
+                ex = op_l + op_r;
+                } else if (b === "-") {
+                ex = op_l - op_r;
+                } else if (b === "*") {
+                ex = op_l * op_r;
+                } else {
+                ex = op_l / op_r;
+                }
+                display(ex);
+                num[numl] = ex;
+                numl = numl + 1;
+            }
+            
+        } else {
+            num[numl] = now;
+            numl = numl + 1;
+            
+        }
+        cnt = cnt + 1;
+    }
+    const b = sym[0];
+                const op_r = num[0];
+                const op_l = num[1];
+                let ex = 0;
+                if (b === "+") {
+                ex = op_l + op_r;
+                } else if (b === "-") {
+                ex = op_l - op_r;
+                } else if (b === "*") {
+                ex = op_l * op_r;
+                } else {
+                ex = op_l / op_r;
+                }
+            
+    return display(ex);
+}
+
+const pfe = [8, 2, "-", 7, 3, "+", "*"];
+const pfe2 = [9, 4, "-"];
+eval_postfix_exp(pfe);  // returns 60
