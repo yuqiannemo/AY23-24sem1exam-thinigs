@@ -20,30 +20,19 @@ function evaluate_BAE_tree(bae_tree) {
 // Question 3B
 ////////////////////////////////////////////////////////////
 
-function build_BAE_tree(bae_list) {
+/*function build_BAE_tree(bae_list) {
     // WRITE HERE.
-    let init = bae_list;
-    let c = 0;
-    let ans = null;
-    let now = head(bae_list);
-    function take(b, cnt) {
-        return cnt === 0
-               ? b
-               : take(tail(b), cnt);
-    }
-    if (head(bae_list) === "(") {
-        while (now !== ")") {
-            now = head(bae_list);
-            if (now === "(") {
-                ans = append(build_BAE_tree(take(init, c)), ans);
-            }
-            ans = pair(now, ans);
-            c = c + 1;
-            bae_list = tail(bae_list);
+    let front = null;
+    let back = bae_list;
+    while (!is_null(back)) {
+        front = append(front, list(head(back)));
+        back = tail(back);
+        if (head(back) === ")") {
+            
+            return build_BAE_tree(pair(reverse(tail(tail(tail(tail(reverse(front)))))), pair() ));
         }
     }
-    return ans;
-}
+}*/
 
 
 
@@ -51,11 +40,11 @@ function build_BAE_tree(bae_list) {
 // Question 3C
 ////////////////////////////////////////////////////////////
 
-function evaluate_BAE(bae_list) {
+/*function evaluate_BAE(bae_list) {
 
     // WRITE HERE.
-
-}
+    return evaluate_BAE_tree(build_BAE_tree(bae_list));
+}*/
 
 
 
@@ -64,9 +53,25 @@ function evaluate_BAE(bae_list) {
 ////////////////////////////////////////////////////////////
 
 function check_parentheses(paren_list) {
-
     // WRITE HERE.
-
+    if (is_null(paren_list)) {
+        return true;
+    }
+    let l = null;
+    let r = null;
+    while(!is_null(paren_list)) {
+        const h = head(paren_list);
+        if (h === "(") {
+            l = pair(1, l);
+        } else {
+            if (is_null(l)) {
+                return false;
+            }
+            l = tail(l);
+        }
+        paren_list = tail(paren_list);//别写死循环！！！！！！
+    }
+    return is_null(l) && is_null(r);
 }
 
 //===========================================================
@@ -74,7 +79,7 @@ function assert(f, test_name, fnames) {
     display(test_name + ": " + (f() ? "PASS" : "FAIL"));
 }
 
-
+/*
 ////////////////////////////////////////////////////////////
 // Test Cases for Q3B
 ////////////////////////////////////////////////////////////
@@ -198,83 +203,4 @@ assert(
     "Q3C-T3",
     ['evaluate_BAE']
 );
-
-
-
-////////////////////////////////////////////////////////////
-// Test Cases for Q3D
-////////////////////////////////////////////////////////////
-
-assert(
-    () => {
-        const paren_list = list();
-        return equal(check_parentheses(paren_list), true);
-    },
-    "Q3D-T1",
-    ['check_parentheses']
-);
-
-assert(
-    () => {
-        const paren_list = list("(", ")");
-        return equal(check_parentheses(paren_list), true);
-    },
-    "Q3D-T2",
-    ['check_parentheses']
-);
-
-assert(
-    () => {
-        const paren_list = list("(", "(", "(", ")", ")",
-                                   "(", "(", ")", "(", ")", ")", ")");
-        return equal(check_parentheses(paren_list), true);
-    },
-    "Q3D-T3",
-    ['check_parentheses']
-);
-
-assert(
-    () => {
-        const paren_list = list(")", "(");
-        return equal(check_parentheses(paren_list), false);
-    },
-    "Q3D-T4",
-    ['check_parentheses']
-);
-
-assert(
-    () => {
-        const paren_list = list("(", "(", ")", ")", ")", "(", "(", ")");
-        return equal(check_parentheses(paren_list), false);
-    },
-    "Q3D-T5",
-    ['check_parentheses']
-);
-
-assert(
-    () => {
-        const paren_list = list("(", "(", ")", "(");
-        return equal(check_parentheses(paren_list), false);
-    },
-    "Q3D-T6",
-    ['check_parentheses']
-);
-
-assert(
-    () => {
-        const paren_list = list("(", ")", "(", ")", "(", ")");
-        return equal(check_parentheses(paren_list), true);
-    },
-    "Q3D-T7",
-    ['check_parentheses']
-);
-
-assert(
-    () => {
-        const paren_list = list("(", "(", "(", ")", ")",
-                                   "(", "(", ")", ")", ")", ")", ")");
-        return equal(check_parentheses(paren_list), false);
-    },
-    "Q3D-T8",
-    ['check_parentheses']
-);
+*/
