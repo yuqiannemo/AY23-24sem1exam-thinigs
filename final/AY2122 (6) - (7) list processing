@@ -1,0 +1,52 @@
+
+function remove_elem(L, pos) {
+    return pos === 0
+           ? tail(L)
+           : pair(head(L), remove_elem(tail(L), pos - 1));
+}
+
+
+const L = list(10, 11, 12, 13);
+const R = remove_elem(L, 2);
+
+
+/*
+function d_remove_elem(L, pos) {
+    if (pos === 0) {
+        return tail(L);
+    } else {
+        set_tail(L, d_remove_elem(tail(L), pos - 1));
+        return L;
+    }
+}
+
+{
+//const L = list(10, 11, 12, 13);
+let R = d_remove_elem(L, 2);
+display(R);  // equals list(10, 11, 13)
+display(L);  // equals list(10, 11, 13)
+
+R = d_remove_elem(L, 0);
+display(R);  // equals list(11, 13)
+display(L);  // equals list(10, 11, 13)
+}*/
+
+
+function remove_elem_mine(L, pos) {
+    return map(x => x >= pos ? list_ref(L, x + 1): list_ref(L, x), enum_list(0, length(L) - 2));
+}
+function d_remove_elem_mine(l, pos) {
+    if (pos === 0) {
+        return tail(L);
+    } else {
+        if (pos === 1) {
+            set_tail(l, tail(tail(l)));
+            return l;
+        } else {
+            return d_remove_elem_mine(tail(l), pos - 1);
+        }
+    }
+}//wrong!!!
+const l = list(1, 2, 3, 4, 5);
+display_list(d_remove_elem_mine(l, 3));
+l;
