@@ -59,9 +59,9 @@ function sum_list(L) {
 
 const L = list(10, 0, 20, 0, 0, 30, 40);
 display( sum_list(L) );  // returns 100
-function mine(x) {
+/*function mine(x) {
     return x === 0
            ? 0
            : x + mine;
 }//Line 65: Expected number on right hand side of operation, got function.
-mine(9)(0);//wrong!!!
+mine(9)(0);//wrong!!!*/
