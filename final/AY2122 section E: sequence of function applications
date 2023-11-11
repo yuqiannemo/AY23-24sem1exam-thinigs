@@ -1,0 +1,61 @@
+function until_zero(x) {
+    return x === 0 ? "Hello" : until_zero;
+}
+
+display( until_zero(0) );  // returns "Hello"
+display( until_zero(82)(0) );  // returns "Hello"
+display( until_zero(1001)(339)(0) );  // returns "Hello"
+display( until_zero(56)(12)(3)(77)(67)(12)(33)(8)(38)(1)(0) );  // returns "Hello"
+
+
+
+
+// Solution 1
+function sumsum(x) {
+     function ss(x, y) {
+         return x === 0 ? y : z => ss(z, x + y);
+     }
+     return ss(x, 0);
+}
+
+// Solution 2
+/*
+function sumsum(x) {
+    function add(y) {
+        x = x + y;
+        return y === 0 ? x : add;
+    }
+    return x === 0 ? x : add;
+}
+*/
+
+display( sumsum(0) );  // returns 0
+display( sumsum(78)(0) );  // returns 78
+display( sumsum(2)(3)(1)(5)(4)(100)(0) );  // returns 115
+display( sumsum(1)(2)(1)(2)(1)(2)(1)(2)(1)(2)(1)(2)(1)(2)(0) );  // returns 21
+
+
+
+
+// Solution 1
+function sum_list(L) {
+    return accumulate((x, add) => x === 0 ? add : add(x),
+                      sumsum,
+                      L)(0);
+}
+
+// Solution 2
+/*
+function sum_list(L) {
+    let adder = sumsum;
+    for (let p = L; !is_null(p); p = tail(p)) {
+        if (head(p) !== 0) { 
+            adder = adder(head(p));
+        }
+    }
+    return adder(0);
+}
+*/
+
+const L = list(10, 0, 20, 0, 0, 30, 40);
+display( sum_list(L) );  // returns 100
