@@ -1,0 +1,70 @@
+function scream_ref(s, n) {
+    function helper(s, i, k) {
+        return k === 0
+               ? head(s)
+               : helper(tail(s)(s, i + 1), i + 1, k - 1);
+    }
+    return helper(s, 0, n);
+}
+
+// Some example screams:
+
+// the scream 1, 1, 1, 1, ...
+const ones = pair(1, (ignore1,ignore2) => pair(1, tail(ones)));
+
+display(scream_ref(ones, 200)); // displays 1
+
+// the scream 0, 1, 2, 3, ...
+const integers = pair(0, (ignore, i) => pair(i, tail(integers)));
+
+display(scream_ref(integers, 200)); // displays 200
+
+// the scream 0, 1, 2, 3, ... in an alternative way
+const integers_alt = 
+    pair(0, (s, ignore) => pair(head(s) + 1, tail(integers_alt)));
+
+display(scream_ref(integers_alt, 200)); // displays 200
+
+
+// Question
+const factorials = 
+    pair(1, (s, i) => 
+          // fill the following line, only using the names
+          // pair, head, tail, factorials, s, i
+          pair( head(s) * i, tail(factorials) )
+        );
+
+display(scream_ref(factorials, 3)); // displays 6
+display(scream_ref(factorials, 5)); // displays 120
+
+
+// Question
+const pi_square_series =
+    pair(0, (s, i) => 
+          // fill the following line, only using the names
+          // pair, head, tail, pi_square_series, s, i
+          pair( head(s) + 6/(i * i), tail(pi_square_series) )
+        );
+
+display(scream_ref(pi_square_series, 1)); // displays 6
+display(scream_ref(pi_square_series, 2)); // displays 7.5
+display(scream_ref(pi_square_series, 2000000)); // displays 9.869601401089872
+
+
+// Question
+const fibonacci = 
+    pair(0,
+         (s1, ignore) =>
+             pair(1,
+                  (s2, ignore) =>
+                      pair(head(s1) + head(s2),
+                           (s3, ignore) =>
+                               // fill the following line,
+                               // only using the names
+                               // tail, s1, s2, s3
+                               tail( tail(s1)(s2, 0) )(s3, 0)
+                          )
+                 )
+        );
+
+display(scream_ref(fibonacci, 7));  // displays 13
