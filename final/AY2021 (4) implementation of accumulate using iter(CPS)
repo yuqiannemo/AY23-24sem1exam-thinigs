@@ -1,0 +1,18 @@
+function accumulate_iter(f, init, xs) {
+    function acc(ys, cont) {
+        return is_null(ys) 
+               ? cont(init)
+               : acc(tail(ys), x => cont(f(head(ys), x)));
+    }
+    return acc(xs, x => x);
+}
+
+//accumulate_iter( (x, y) => x / y, 2, list(24, 16, 8) );
+
+
+function acc_iter_mine(f, init, xs) {
+    return is_null(xs)
+           ? init
+           : acc_iter_mine(f, f(head(reverse(xs)), init), reverse(tail(reverse(xs))));
+}
+acc_iter_mine( (x, y) => x / y, 2, list(28, 16, 8) );
