@@ -1,0 +1,38 @@
+function copy(xs) {
+    return map(x => x, xs);
+}
+
+function last_pair(xs) {
+    return is_null(tail(xs))
+           ? xs
+           : last_pair(tail(xs));
+}
+
+function hoopify(xs) {
+    const c = copy(xs);
+    const lp = last_pair(c); 
+    set_tail(lp, c);
+    return c;
+}
+
+function list_pair(xs, m) {//iteration遍历找到起始位置
+    return m === 0
+           ? xs
+           : list_pair(tail(xs), m - 1);
+}
+
+function partially_hoopify(xs, m) {
+    const c = copy(xs);//使得原值不被改变
+    const lp = last_pair(c); 
+    set_tail(lp, list_pair(c, m));
+    return c;
+}
+
+
+function p_hoopify_mine(xs, m) {
+    return m === 0
+           ? hoopify(xs)
+           : pair(head(xs), p_hoopify_mine(tail(xs), m - 1));
+}
+const p = p_hoopify_mine(list(1,2,3,4,5), 4);
+draw_data(p);
