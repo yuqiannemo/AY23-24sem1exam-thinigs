@@ -1,0 +1,85 @@
+function tree_to_arraytree(xs) {
+ if (is_number(xs)) {
+ return xs;
+ } else {
+ const a = [];
+ let i = 0;
+ while (!is_null(xs)) {
+ a[i] = tree_to_arraytree(head(xs));
+ i = i + 1;
+ xs = tail(xs);
+ }
+ return a;
+ }
+}
+
+function arraytree_to_tree(a) {
+ if (is_number(a)) {
+ return a;
+ } else {
+ let xs = null;
+ const len = array_length(a);
+ for (let i = len - 1; i >= 0; i = i - 1) {
+ xs = pair(arraytree_to_tree(a[i]), xs);
+ }
+ return xs;
+ }
+}
+//lesson：学会精简原则，放到base case里面去处理（虽然这道题差别不大）
+function tree_to_arraytree_mine(xs) {
+    let m = [];
+    let k = 0;
+    while(!is_null(xs)) {
+        if(is_number(head(xs))) {
+            m[k] = head(xs);
+        } else {
+            m[k] = tree_to_arraytree_mine(head(xs));
+        }
+        xs = tail(xs);
+        k = k + 1;
+    }
+    return m;
+}
+
+function arraytree_to_tree_mine(a) {
+    let m = null;
+    for (let i = 0; i < array_length(a); i =  i + 1) {
+        if(is_number(a[i])) {
+            m = pair(a[i], m);
+        } else {
+            m = pair(arraytree_to_tree_mine(a[i]), m);
+        }
+    }
+    return reverse(m);
+}
+display_list(arraytree_to_tree_mine([]));
+ // returns null
+display_list(arraytree_to_tree_mine([10, 20, 30]));
+ // returns a value equal to the result of list(10, 20, 30)
+display_list(arraytree_to_tree_mine([[10, 20, 30], [30, 20, 10]]));
+ // returns a value equal to the result of
+ // list(list(10, 20, 30), list(30, 20, 10)));
+
+
+tree_to_arraytree_mine(list());
+ // returns []
+tree_to_arraytree_mine(list(10, 20, 30));
+ // returns [10, 20, 30]
+tree_to_arraytree_mine(list(list(10, 20, 30), list(30, 20, 10)));
+ // returns [[10, 20, 30], [30, 20, 10]]
+
+function permutations(s) {
+ return is_null(s)
+ ? list(null)
+ : accumulate(append, null,
+ map(x => map(p => pair(x, p),
+ permutations(remove(x, s))),
+ s));
+} 
+ 
+function array_permutations(a) {
+    return tree_to_arraytree(permutations(arraytree_to_tree(a)));
+}
+
+
+array_permutations([10, 20, 30]);
