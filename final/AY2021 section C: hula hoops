@@ -1,0 +1,64 @@
+const hh1 = pair(undefined, undefined);
+const hh2 = pair(undefined, undefined);
+const hh3 = pair(undefined, undefined);
+
+set_head(hh1, hh1);
+set_tail(hh1, hh1);
+
+const hh2_new = pair(undefined, undefined);
+set_head(hh2_new, hh2_new);
+set_tail(hh2_new, hh2_new);
+set_head(hh2, hh2_new);
+set_tail(hh2, hh2);
+
+const hh3_new = pair(undefined, undefined);
+set_head(hh3_new, hh3);
+set_tail(hh3_new, hh3);
+set_head(hh3, hh3_new);
+set_tail(hh3, hh3_new);
+
+//draw_data(hh1);
+//draw_data(hh2);
+//draw_data(hh3);
+
+function is_hula_hoop(x) {
+    let pairs = null;
+    function check(y) {
+        if (is_pair(y)) {
+            if (! is_null(member(y, pairs))) {
+                return true;
+            } else {
+                pairs = pair(y, pairs);
+                return check(head(y)) && check(tail(y));
+            }
+        } else {
+            return false;
+        }
+    }
+    return check(x);
+}
+
+function is_hula_hoop_mine(x) {
+    let m = null;
+    if (is_pair(x)) {
+        if (!is_null(member(x, m))) {
+            return true;
+        }
+        m = pair(x, m);
+        return is_hula_hoop_mine(head(m)) && is_hula_hoop_mine(tail(m));
+    } else {
+        return false;
+    }
+}
+
+display(is_hula_hoop(1));
+display(is_hula_hoop(list(1,2,3)));
+display(is_hula_hoop(hh1));
+display(is_hula_hoop(hh2));
+display(is_hula_hoop(hh3));
+
+display(is_hula_hoop_mine(1));
+display(is_hula_hoop_mine(list(1,2,3)));
+display(is_hula_hoop_mine(hh1));
+display(is_hula_hoop_mine(hh2));
+display(is_hula_hoop_mine(hh3));
