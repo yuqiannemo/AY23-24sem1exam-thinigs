@@ -1,0 +1,31 @@
+function swap(A, i, j) {
+const temp = A[i];
+A[i] = A[j];
+A[j] = temp;
+}
+function reorder2(A, T) {
+const N = array_length(A);
+for (let i = 0; i < N; i = i + 1) {
+while (T[i] !== i) {swap(A, i, T[i]);
+swap(T, i, T[i]);
+
+}
+}
+}
+
+function reorder1(A, T) {
+const N = array_length(A);
+for (let i = 0; i < N; i = i + 1) {
+while (T[i] !== i) {
+const sIdx = i;
+const tIdx = T[i];
+swap(T, sIdx, tIdx);
+swap(A, sIdx, tIdx);
+}
+}
+}
+
+let a = [78, 23, 56, 12, 99];
+let t = [4, 3, 2, 1, 0];
+reorder2(a, t);
+a;
