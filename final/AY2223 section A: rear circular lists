@@ -1,0 +1,38 @@
+let c = list(1, 2, 3);
+set_tail(tail(tail(c)), c);
+c = tail(tail(c));draw_data(c);
+
+function insert_last(C, x) {
+    const new_pair = pair(x, tail(C));
+    set_tail(C, new_pair);  
+    return new_pair;
+}
+
+function insert_last_mine(c, x) {
+    let h = tail(c);
+    set_tail(c, list(x));
+    set_tail(tail(c), h);
+    return tail(c);
+}
+
+function make_RCL(L) {
+let C = pair(head(L), null); // new pair for the first element.
+set_tail(C, C); // make an RCL for the first element.
+for (let p = tail(L); !is_null(p); p = tail(p)) {
+C = insert_last(C, head(p));
+}
+return C;
+}
+make_RCL(list(9, 8, 7, 6));
+
+function make_RCL_mine(l) {
+    let C = pair(head(l), null); // new pair for the first element.
+    set_tail(C, C); // make an RCL for the first element.
+    let ll = l;
+    while(!is_null(tail(ll))) {
+        ll = tail(ll);
+        C = insert_last(C, head(ll));
+    }
+    return C;
+}
+make_RCL_mine(list(9, 8, 7, 6));
