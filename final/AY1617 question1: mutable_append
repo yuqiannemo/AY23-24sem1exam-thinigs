@@ -1,0 +1,35 @@
+function mutable_append(xs, ys) {
+if (is_null(xs)) {
+return ys;
+} else {
+set_tail(xs, mutable_append(tail(xs), ys));
+return xs;
+}
+}
+
+function mutable_append_mine(xs, ys) {
+    if (is_null(xs)) {
+        return ys;
+    } else {
+        mutable_append(tail(xs), ys);
+        return xs;
+    }
+}
+
+function mutable_append_mine_iter(xs, ys) {
+    if (is_null(xs)) {
+        return ys;
+    }
+    let pt = xs;
+    while(!is_null(tail(pt))) {
+        pt = tail(pt);
+    }
+    set_tail(pt, ys);
+    return xs;
+}
+
+const xs = list(1, 2, 3);
+const ys = list(2, 3, 4);
+draw_data(mutable_append_mine_iter(xs, ys));
+draw_data(xs);
+draw_data(ys);
