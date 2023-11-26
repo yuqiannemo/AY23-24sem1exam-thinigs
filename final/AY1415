@@ -1,0 +1,99 @@
+/*function n_of_streams() {
+    function helper(a, b) {
+        if (a === b) {
+            return pair(a, () => helper(a + 1, 1));
+        }
+        return pair(b, () => helper(a, b + 1));
+    }
+    return helper(1, 1);
+}
+eval_stream(n_of_streams(), 12);
+*/
+
+
+/*function table_to_snake_list(table, height, width) {
+    let snake = null;
+    for (let row = 0; row < height; row = row + 1) {
+        for (let col = 0; col < width; col = col + 1) {
+            if (row % 2 === 0) {
+                let h = table[row][col];
+            } else {
+                let h = table[row][width-col-1];
+            }
+        snake = pair(h, snake);
+    }
+    }
+    return reverse(snake);
+}
+
+let table = [[ 1, 2, 3],
+[ 4, 5, 6],
+[ 7, 8, 9],
+[10, 11, 12]];
+table_to_snake_list(table, 4, 3);*/
+
+/*function mergeA(xs, ys) {
+if (is_null(xs) ){
+    return ys;
+} 
+if (is_null(ys)) {
+    return xs;
+}
+else if (head(xs) <= head(ys)) {
+return pair(head(xs), mergeA(tail(xs), ys));
+} else {
+return pair(head(ys), mergeA(xs, tail(ys)));
+}
+}
+
+mergeA(list(1, 3, 4, 4, 10), list(2, 2, 3, 4, 5));
+
+for (let i = 0;i < 0; i = i + 1) {
+    display("123");
+}*/ 
+
+/*function per(l) {
+    return accumulate(append, null, map(h => map(x => pair(h, x), per(remove(h, l))), l));
+}
+
+display_list(per(list(1, 2, 3, 4)));
+*/
+
+
+function make_circular_copy(xs) {
+    let ans = map(x => x, xs);
+    let pt = ans;
+    while(!is_null(tail(pt))) {
+        pt = tail(pt);
+    }
+    set_tail(pt, ans);
+    return ans;
+}
+draw_data(make_circular_copy(list(1,2 , 3)));
+
+
+
+function make_linear(xs) {
+    let pt = xs;
+    while(tail(pt) !== xs) {
+        pt = tail(pt);
+    }
+    set_tail(pt, null);
+    return xs;
+}
+make_linear(make_circular_copy(list(1,2 , 3)));
+
+
+
+
+
+eval_stream
+
+
+
+
+
+
+
+
+
